@@ -1,5 +1,8 @@
 package home;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+
 /**
  * Создайте абстрактный класс "Animal" с полями "name" и "age".
  * Реализуйте два класса-наследника от "Animal" (например, "Dog" и "Cat") с уникальными полями и методами.
@@ -15,9 +18,15 @@ package home;
 
 
 public class Main {
-    public static void main(String[] args) {
-        Animal[] listAnimal = new Animal[10]; 
+    public static void main(String[] args) throws ClassNotFoundException {
+        ArrayList<Animal> listAnimal = new ArrayList<>();
+        listAnimal.add(new Dog("play football","shark",5));
+        listAnimal.add(new Cat("orange","murzic",2));
 
-
+        Class<?> classAnimal = Class.forName("home.Animal");
+        Method[] a = classAnimal.getDeclaredMethods();
+        for (Method method: a){
+            System.out.println("метод "+method);
+        }
     }
 }
