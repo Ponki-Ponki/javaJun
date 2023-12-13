@@ -1,5 +1,6 @@
 package home;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
@@ -18,15 +19,18 @@ import java.util.ArrayList;
 
 
 public class Main {
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         ArrayList<Animal> listAnimal = new ArrayList<>();
         listAnimal.add(new Dog("play football","shark",5));
         listAnimal.add(new Cat("orange","murzic",2));
 
         Class<?> classAnimal = Class.forName("home.Animal");
-        Method[] a = classAnimal.getDeclaredMethods();
-        for (Method method: a){
-            System.out.println("метод "+method);
+        Method[] a = classAnimal.getMethods();
+        Method toString = classAnimal.getDeclaredMethod("toString");
+
+        for (Animal animal: listAnimal) {
+            toString.invoke(animal);
         }
+
     }
 }
