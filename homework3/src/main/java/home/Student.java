@@ -3,8 +3,8 @@ package home;
 import java.io.*;
 
 public class Student implements Externalizable {
-    String name;
-    int age;
+    public String name;
+    public int age;
     transient double GPA; // transient защита от сериализации
 
     public Student() {
