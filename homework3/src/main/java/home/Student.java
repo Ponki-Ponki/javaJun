@@ -1,8 +1,8 @@
 package home;
 
-import java.io.Serializable;
+import java.io.*;
 
-public class Student implements Serializable {
+public class Student implements Externalizable {
     String name;
     int age;
     transient double GPA; // transient защита от сериализации
@@ -26,5 +26,17 @@ public class Student implements Serializable {
                 ", age=" + age +
                 ", GPA=" + GPA +
                 '}';
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(name);
+        out.writeObject(age);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        name = (String) in.readObject();
+        age = (int) in.readObject();
     }
 }
