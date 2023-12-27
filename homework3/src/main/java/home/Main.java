@@ -5,8 +5,6 @@ public class Main {
         Student student = new Student();
 
 
-
-
         SaveAndWrite.saveTasksToFile(SaveAndWrite.FILE_JSON,student);
         SaveAndWrite.saveTasksToFile(SaveAndWrite.FILE_XML,student);
         SaveAndWrite.saveTasksToFile(SaveAndWrite.FILE_BIN,student);
