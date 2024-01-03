@@ -12,7 +12,6 @@ public class Program {
         try {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Введите своё имя: ");
-            // Укажем свое имя
             String name = scanner.nextLine();
             Socket socket = new Socket("localhost", 1400);
             Client client = new Client(socket, name);

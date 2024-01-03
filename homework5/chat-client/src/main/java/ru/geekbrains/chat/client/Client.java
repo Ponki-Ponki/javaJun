@@ -30,18 +30,15 @@ public class Client {
      * Слушатель для входящих сообщений
      */
     public void listenForMessage(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String message;
-                while (socket.isConnected()){
-                    try {
-                        message = bufferedReader.readLine();
-                        System.out.println(message);
-                    }
-                    catch (IOException e){
-                        closeEverything(socket, bufferedReader, bufferedWriter);
-                    }
+        new Thread(() -> {
+            String message;
+            while (socket.isConnected()){
+                try {
+                    message = bufferedReader.readLine();
+                    System.out.println(message);
+                }
+                catch (IOException e){
+                    closeEverything(socket, bufferedReader, bufferedWriter);
                 }
             }
         }).start();

@@ -11,7 +11,7 @@ public class ClientManager implements Runnable {
     private BufferedWriter bufferedWriter;
     private String name;
 
-    public final static ArrayList<ClientManager> clients = new ArrayList<>();
+    public static final ArrayList<ClientManager> clients = new ArrayList<>();
 
     public ClientManager(Socket socket) {
         this.socket = socket;
@@ -37,11 +37,6 @@ public class ClientManager implements Runnable {
         while (socket.isConnected()) {
             try {
                 massageFromClient = bufferedReader.readLine();
-                /*if (massageFromClient == null){
-                    // для  macOS
-                    closeEverything(socket, bufferedReader, bufferedWriter);
-                    break;
-                }*/
                 broadcastMessage(massageFromClient);
             }
             catch (IOException e){
@@ -68,18 +63,14 @@ public class ClientManager implements Runnable {
 
 
     private void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
-        // Удаление клиента из коллекции
         removeClient();
         try {
-            // Завершаем работу буфера на чтение данных
             if (bufferedReader != null) {
                 bufferedReader.close();
             }
-            // Завершаем работу буфера для записи данных
             if (bufferedWriter != null) {
                 bufferedWriter.close();
             }
-            // Закрытие соединения с клиентским сокетом
             if (socket != null) {
                 socket.close();
             }
